@@ -14,12 +14,26 @@
 	<!-- <a href="#" class="lock"> -->
 <!-- </a> -->
 <div class="main-outter">
-	<div class="lock-status">
-		<i class="thc fa fa-unlock unlock" aria-hidden="true"></i>
-		<i class="thc fa fa-lock lock" aria-hidden="true"></i>
+	<div class="tools">
+		<div class="lock-status">
+			<i class="thc fa fa-unlock unlock" aria-hidden="true"></i>
+			<i class="thc fa fa-lock lock" aria-hidden="true"></i>
+		</div>
+		<div class="add-tag">
+			<div>
+				<div class="color-outter">
+					<input type="color" id="color">
+
+				</div>
+				<input type="text" placeholder="Tag name..." id="tagname">
+				<i class="fas fa-plus add" onclick="saveTag()"></i>
+			</div>
+		</div>
+		<div class="active-tag">
+			<span>Current Tag :</span>
+			<span class="active-tag-content">none</span>
+		</div>
 	</div>
-	<input type="color" onchange="setColor(this.value)" onload="setColor(this.value)" >
-	<input type="text" onchange="setClass(this.value)"  onload="setClass(this.value)" >
 	<div onselect="clickx()" class="main" contenteditable="true"></div>
 
 </div>

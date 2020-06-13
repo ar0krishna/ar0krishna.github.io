@@ -58,19 +58,91 @@
 		vertical-align: text-top !important;
 		
 }
-
+.add-tag > div{
+	display: flex;
+	align-content: center;
+	border: 1px solid #bbb;
+border-radius: 4px;
+}
+.tools {
+	display: flex;
+	align-items: center;
+}
+.add-tag .add {
+	font-size: 14px;
+	/* vertical-align: middle; */
+	align-self: center;
+	color: #b9b9b9;
+	padding: 6px;
+	transition: 0.4s ease all;
+}
+.add-tag .add:active,
+.add-tag .add:hover {
+	color: #5d5d5d;
+}
+.add-tag .color-outter {
+	display: flex;
+	border: 1px solid #8c8c8c;
+	margin: 5px;
+	width: 20px;
+  height: 20px;
+  border-radius: 20px;
+	overflow: hidden;
+	position: relative;
+}
+.add-tag #color {
+	background: white;
+	border: 0 !important;
+	outline: 0 !important;
+	padding: 0 !important;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	cursor: pointer;
+	transform: translate(-21%, -24%);
+}
+.add-tag #tagname:placeholder {
+	color:#c3c1c1;
+}
+.add-tag #tagname {
+	border: none;
+	/* border: 1px solid gray; */
+	border-left: none;
+	padding: 6px 10px;
+	color: #646363;
+}
+.add-tag{
+	display: inline-block;
+}
 .lock-status {
 	width: 30px !important;
 	display: inline-block;
+	vertical-align: super;
+}
+
+.active-tag {
+	padding: 1px 12px;
+	display: flex;
+}
+
+.active-tag > span {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 12px;
+	color: #6b6b6b;
 }
 
 .tag {
-	font-size: 8px;
-	vertical-align: bottom;
-	padding: 1px 4px;
+	font-size: 11px  ;
+	padding: 3px 10px;
 	/* background: #560087; */
 	color: white;
 	border-radius: 2px;
+}
+.main .tag{
+
+	font-size: 8px !important;
+	padding: 1px 4px !important;
+	vertical-align: bottom;
 }
 .selected{
     /* background-color: #ff00004f;

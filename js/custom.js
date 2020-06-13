@@ -3,33 +3,70 @@ var current = {
 	color:'',
 }
 
-var reserved_colorcodes=[];
-var reserved_class=[];
+var previous = [];
+
+
+// var reserved_colorcodes=[];
+// var reserved_class=[];
 
 console.log(current);
 
 
-function setColor(color){
-	// console.log(color);
-	if(reserved_colorcodes.includes(color)){
-		alert('Color userd pick another one');
+function saveTag(){
+	var used = false;
+	var tagname = $('#tagname');
+	var color = $('#color');
+	if(!tagname.val()){
+		return;
 	}
-	else{
-		reserved_colorcodes.push(color); 
-		current.color = color;
-	}
-}
 
-function setClass(txt){
-	console.log(txt);
-	if(reserved_class.includes(txt)){
-		alert('Class userd pick another one');
-	}
-	else{
-		reserved_class.push(txt); 
-		current.name = txt;
-	}
+		if(current.name)
+ 			previous.push({name:current.name,color:current.color});
+	// current.name = tagname.val();
+	// current.color = color.val();
+	if(previous.length>0){
+		// 	// check
+			previous.forEach(function (item) {
+				if(item.name == tagname.val() || item.color == color.val()){
+					used = true;
+				}
+		});
+		}
+		if(used){
+			previous.pop();
+			alert('color/name already used! Use diffrent one');
+			return;
+		}
+	setactive(tagname.val(),color.val());
+	tagname.val('');
+	color.val('#000');
 }
+function setactive(name,color) { 
+		current.name = name;
+	current.color = color;
+	$('.active-tag-content').html(` <span style="background:${color};" class="tag">${name}</span></span> `);
+ }
+// function setColor(color){
+// 	// console.log(color);
+// 	if(reserved_colorcodes.includes(color)){
+// 		alert('Color userd pick another one');
+// 	}
+// 	else{
+// 		reserved_colorcodes.push(color); 
+// 		current.color = color;
+// 	}
+// }
+
+// function setClass(txt){
+// 	console.log(txt);
+// 	if(reserved_class.includes(txt)){
+// 		alert('Class userd pick another one');
+// 	}
+// 	else{
+// 		reserved_class.push(txt); 
+// 		current.name = txt;
+// 	}
+// }
 // var mouseDown = false;
 // $('.main').on('mousedown touchstart', function(event) {
 //   event.preventDefault();
@@ -46,6 +83,9 @@ function setClass(txt){
 		var parent =null;
 		var flg = (!$(this).text()) || ($(this).prop('contenteditable'));
 		if(flg !="false"){
+			return;
+		}
+		if(!current.name){
 			return;
 		}
 		
