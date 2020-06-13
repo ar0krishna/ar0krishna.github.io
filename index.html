@@ -33,11 +33,31 @@
 			<span>Current Tag :</span>
 			<span class="active-tag-content">none</span>
 		</div>
+		<button class="tag-list" onclick="openTagList()"><i class="fas fa-tags"></i> Tag list
+		</button>
+		<button class="actionbtn" onclick="save(this)" style="position: absolute;right: 0;" data-parsed="false" >
+			<i class="fas fa-save"></i> Save</button>
+
 	</div>
 	<div onselect="clickx()" class="main" contenteditable="true"></div>
 
 </div>
-    <button onclick="save(this)" data-parsed="false" >Save</button>
+<div class="tag-list-box">
+	<div class="tag-list-middle">
+		<div class="tag-list-content">
+			<div class="tag-list-head">
+				<h3>Used Tags <span onclick="closeTagList()" style="float:right">x</span></h3>
+				
+			</div>
+			<div class="tag-list-body">
+				<p class="emty">No tags available</p>
+				<!-- <div class="item">
+					<span style="background:#000000;" class="tag">asdsad (3)</span>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
     <script src="./js/jquery-3.5.1.min.js"></script>
     <script src="./js/custom.js"></script>
 </body>

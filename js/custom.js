@@ -13,6 +13,7 @@ console.log(current);
 
 
 function saveTag(){
+	clearSelection()
 	var used = false;
 	var tagname = $('#tagname');
 	var color = $('#color');
@@ -195,21 +196,28 @@ function clearSelection() {
 }
 function save(button) {
 	// console.log($(button).data('parsed'));
-	
+	if($('.main').text() == ""){
+		return;
+	}
+	clearSelection()
 	if($(button).data('parsed') == false){
 		var text = strip($('.main').html());
 		$('.main').text(text);
 		$(button).data('parsed','true')
 	}
 	if($('.main').prop('contenteditable') == "false"){
-		$('.main').prop('contenteditable',true);
-		$('.lock-status .lock').hide();
-		$('.lock-status .unlock').show();
+		// $('.main').prop('contenteditable',true);
+		// $('.lock-status .lock').hide();
+		// $('.lock-status .unlock').show();
+		// $(button).html('<i class="fas fa-file-download"></i> Export');
+		// export
 	}
 	else{
 		$('.main').prop('contenteditable',false);
 		$('.lock-status .unlock').hide();
 		$('.lock-status .lock').show();
+		// $(button).html('<i class="fas fa-edit"></i> Edit');
+		$(button).html('<i class="fas fa-file-download"></i> Export');
 	}
 }
 function strip(html) {
@@ -236,4 +244,14 @@ function clickx() {
     
         range.insertNode(span);
     }
+}
+
+function openTagList() {
+	$('.tag-list-body').html();
+	
+	$('.tag-list-box').fadeIn(100);
+}
+
+function closeTagList() {
+	$('.tag-list-box').fadeOut(100);
 }
