@@ -58,12 +58,26 @@
 		vertical-align: text-top !important;
 		
 }
+
+.lock-status {
+	width: 30px !important;
+	display: inline-block;
+}
+
+.tag {
+	font-size: 8px;
+	vertical-align: bottom;
+	padding: 1px 4px;
+	/* background: #560087; */
+	color: white;
+	border-radius: 2px;
+}
 .selected{
     /* background-color: #ff00004f;
     color: white; */
-    padding: 4px;
-    margin: 4px;
-    border: 1.5px solid;
+    padding: 1px 3px;
+    margin: 3px;
+    border: 2px solid;
     border-radius: 5px;
 }
 

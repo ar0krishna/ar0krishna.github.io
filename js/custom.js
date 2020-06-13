@@ -1,10 +1,93 @@
 var current = {
-	name:'xxxx',
-	color:'#f00',
+	name:'',
+	color:'',
 }
-	$('.main').on('dblclick', function (e) {
-		var selection               = window.getSelection();
-		var selected_txt               = window.getSelection().toString();
+
+var reserved_colorcodes=[];
+var reserved_class=[];
+
+console.log(current);
+
+
+function setColor(color){
+	// console.log(color);
+	if(reserved_colorcodes.includes(color)){
+		alert('Color userd pick another one');
+	}
+	else{
+		reserved_colorcodes.push(color); 
+		current.color = color;
+	}
+}
+
+function setClass(txt){
+	console.log(txt);
+	if(reserved_class.includes(txt)){
+		alert('Class userd pick another one');
+	}
+	else{
+		reserved_class.push(txt); 
+		current.name = txt;
+	}
+}
+// var mouseDown = false;
+// $('.main').on('mousedown touchstart', function(event) {
+//   event.preventDefault();
+//   mouseDown = true;
+// });
+// $('.main').on('mousemove touchmove', function(event) {
+//   // if(!editor_active) {
+// 		event.preventDefault();
+//   // }
+// });
+// / mousemove touchmove
+	$('.main').on('click mousemove touchmove', function (e) {
+		var selection  	= window.getSelection();
+		var parent =null;
+		var flg = (!$(this).text()) || ($(this).prop('contenteditable'));
+		if(flg !="false"){
+			return;
+		}
+		
+		if(window.getSelection().anchorNode){
+			parent	= window.getSelection().anchorNode.parentElement;
+		}
+
+		if(parent && !$(parent).hasClass('main')){
+			return;
+		}
+		try{
+			var range 			= selection.getRangeAt(0);
+		}
+		catch(e){
+			// console.log('break');
+			return;
+		}
+		
+		var node 				= selection.anchorNode;
+      while (range.toString().indexOf(' ') != 0) {
+					
+					if(range.startOffset ==0 ){
+						break;
+					}
+					range.setStart(node, (range.startOffset - 1));
+				// }
+      }
+      range.setStart(node, range.startOffset + 1);
+      do {
+				try{
+					
+					range.setEnd(node, range.endOffset + 1);
+				}
+				catch(e){
+					break;
+				}
+      }
+			while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');
+			
+      range.setStart(node, range.startOffset - 1);
+		var selected_txt         = range.toString().trim();
+
 		if (e.ctrlKey) {
 			// console.groupCollapsed('yes control');
 			//  console.log(selection);
@@ -20,9 +103,8 @@ var current = {
 		// 	console.log(selection.anchorOffset);
 		// 	console.log(selection.focusOffset);
 		// 	console.groupEnd();
-			var range               = window.getSelection().getRangeAt(0);
 			var selectionContents   = range.extractContents();
-			var span                = $(`<span class="selected" style="border-color:">  <span>${selected_txt}</span> </span>`)[0];
+			var span                = $(`<span class="selected" start="" end="" classgroup=""  style="border-color:${current.color};background:${current.color}40;">  <span>${selected_txt} <span style="background:${current.color};" class="tag">${current.name}</span></span> </span>`)[0];
 			
 			// span.setAttribute("class","selected");
 	
@@ -35,6 +117,33 @@ var current = {
 		
 	});
 // });​
+// $(".main").live("click",function(event)
+//     {
+//         event.stopPropagation();
+//         SelectText($(this));
+//     });
+
+function SelectText(element)
+{
+    var doc = document,
+            text = element.get(0),
+            range,
+            selection;
+    if (doc.body.createTextRange)
+    {
+        range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    }
+    else if (window.getSelection)
+    {
+        selection = window.getSelection();
+        range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+}
 
 function clearSelection() {
 	if(document.selection && document.selection.empty) {
@@ -45,7 +154,7 @@ function clearSelection() {
 	}
 }
 function save(button) {
-	console.log($(button).data('parsed'));
+	// console.log($(button).data('parsed'));
 	
 	if($(button).data('parsed') == false){
 		var text = strip($('.main').html());
